@@ -7,6 +7,18 @@ class Deck
     @stack = generate_stack
   end
 
+ 
+
+  def draw 
+    @stack.pop
+  end
+
+  def shuffle 
+    @stack.shuffle!
+  end
+
+  private
+
   def generate_stack
     VALUES.product(SUITS).map!(&:join)
 
@@ -19,27 +31,71 @@ class Deck
     # stack
   end
 
-  def draw 
-    @stack.pop
-  end
-
-  def shuffle 
-    @stack.shuffle!
-  end
-
 
 end
 
 
 class Player
-  
+  def initialize
+    @hand = []
+  end
+    
+    def draw(card)
+      @hand << card
+    end
+
+    def peek_at_hand(player)
+      reveal_hand
+    end
+
+    private
+
+    def reveal_hand
+      puts @hand
+    end
 end
 
 
 class Dealer
-  
+  def initialize
+    @deck = Deck.new
+  end
+
+  def deal_card(player)
+    player.draw(@deck.draw)
+  end
+
+  def shuffle_deck
+    @deck.shuffle
+  end
+
+  def burn_card
+    @deck.draw
+  end
+
+  def open_pack
+    @deck = Deck.new
+  end
+
+  # def bad_method
+  #   @deck.generate_stack
+  # end
+
 end
 
-p Deck::VALUES
-deck = Deck.new
-p deck
+# p Deck::VALUES
+# deck = Deck.new
+# p deck
+
+dealer = Dealer.new
+tara = Player.new
+p dealer
+p dealer.shuffle_deck
+dealer.burn_card
+5.times { dealer.deal_card(tara) }
+
+p dealer
+p tara
+# p dealer.bad_method
+
+tara.peek_at_hand(tara)
