@@ -1,13 +1,11 @@
 
 class Deck
-  SUITS = ['s', 'h', 'd', 'c']
+  SUITS = ['♠︎', '❤️', '♦︎', '♣︎']
   VALUES = (2..10).map(&:to_s) + ['J', 'Q', 'K', 'A']
 
   def initialize
     @stack = generate_stack
   end
-
- 
 
   def draw 
     @stack.pop
@@ -59,10 +57,11 @@ end
 class Dealer
   def initialize
     @deck = Deck.new
+    @name = "Tommy"
   end
 
   def deal_card(player)
-    player.draw(@deck.draw)
+    player.draw(@deck.draw) #draw(card) card = @deck.draw method from Player class;  @deck.draw from Deck class
   end
 
   def shuffle_deck
@@ -77,6 +76,10 @@ class Dealer
     @deck = Deck.new
   end
 
+  def show_deck
+    p @deck
+  end
+
   # def bad_method
   #   @deck.generate_stack
   # end
@@ -86,6 +89,11 @@ end
 # p Deck::VALUES
 # deck = Deck.new
 # p deck
+dealer = Dealer.new
+p dealer
+dealer.show_deck
+p dealer.shuffle_deck
+
 
 dealer = Dealer.new
 tara = Player.new
