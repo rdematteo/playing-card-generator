@@ -15,7 +15,7 @@ class Deck
     @stack.shuffle!
   end
 
-  private
+  private #cannot be called with a specific receiver 
 
   def generate_stack
     VALUES.product(SUITS).map!(&:join)
